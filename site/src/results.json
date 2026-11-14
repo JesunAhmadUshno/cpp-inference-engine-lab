@@ -1,0 +1,263 @@
+{
+  "fp32": {
+    "throughput": {
+      "promptTokens": 64,
+      "generatedTokens": 128,
+      "reps": [
+        6.4376,
+        6.551,
+        4.5235,
+        4.5396,
+        4.9865,
+        6.564,
+        6.391
+      ],
+      "display": {
+        "reps": [
+          "6.44",
+          "6.55",
+          "4.52",
+          "4.54",
+          "4.99",
+          "6.56",
+          "6.39"
+        ],
+        "mean": "5.713",
+        "std": "0.977",
+        "median": "6.391",
+        "min": "4.524",
+        "max": "6.564"
+      },
+      "meanRaw": 5.7133
+    },
+    "weightStorageBytes": 497759232,
+    "weightStorageDisplay": "497,759,232",
+    "vmhwmMib": 566.99,
+    "vmhwmDisplay": "566.99",
+    "loadSeconds": 2.826,
+    "perplexity": {
+      "tokensInSet": 8192,
+      "predictedTokens": 8184,
+      "totalNllDisplay": "28815.44",
+      "valueDisplay": "33.8165",
+      "valueRaw": 33.816475
+    },
+    "suite": {
+      "prompts": [
+        {
+          "prompt": "The history of the Roman Empire is",
+          "rep20": 0.95,
+          "distinct20": 0.75,
+          "sane": true
+        },
+        {
+          "prompt": "In a small village by the sea, there lived",
+          "rep20": 1,
+          "distinct20": 0.45,
+          "sane": true
+        },
+        {
+          "prompt": "The quick brown fox jumps over the",
+          "rep20": 1,
+          "distinct20": 0.45,
+          "sane": true
+        },
+        {
+          "prompt": "Scientists have discovered a new species of",
+          "rep20": 0.75,
+          "distinct20": 0.75,
+          "sane": true
+        },
+        {
+          "prompt": "To make a good cup of coffee, you should",
+          "rep20": 1,
+          "distinct20": 0.75,
+          "sane": true
+        },
+        {
+          "prompt": "The stock market rose sharply after",
+          "rep20": 1,
+          "distinct20": 0.9,
+          "sane": true
+        },
+        {
+          "prompt": "Once upon a time, in a kingdom far away,",
+          "rep20": 1,
+          "distinct20": 0.25,
+          "sane": true
+        },
+        {
+          "prompt": "The recipe calls for two cups of flour and",
+          "rep20": 1,
+          "distinct20": 0.7,
+          "sane": true
+        },
+        {
+          "prompt": "When the train arrived at the station,",
+          "rep20": 0.85,
+          "distinct20": 0.85,
+          "sane": true
+        },
+        {
+          "prompt": "Artificial intelligence will change the way we",
+          "rep20": 1,
+          "distinct20": 0.7,
+          "sane": true
+        },
+        {
+          "prompt": "The old lighthouse keeper watched as the",
+          "rep20": 1,
+          "distinct20": 0.2,
+          "sane": true
+        },
+        {
+          "prompt": "If you want to learn a new language,",
+          "rep20": 0.9,
+          "distinct20": 0.6,
+          "sane": true
+        }
+      ],
+      "rep20MeanDisplay": "0.9542",
+      "distinct20MeanDisplay": "0.6125",
+      "saneCount": 12,
+      "promptCount": 12
+    }
+  },
+  "int8": {
+    "throughput": {
+      "promptTokens": 64,
+      "generatedTokens": 128,
+      "reps": [
+        3.729,
+        3.7994,
+        3.0621,
+        2.3478,
+        3.4506,
+        3.5366,
+        3.8427
+      ],
+      "display": {
+        "reps": [
+          "3.73",
+          "3.80",
+          "3.06",
+          "2.35",
+          "3.45",
+          "3.54",
+          "3.84"
+        ],
+        "mean": "3.395",
+        "std": "0.533",
+        "median": "3.537",
+        "min": "2.348",
+        "max": "3.843"
+      },
+      "meanRaw": 3.3954
+    },
+    "weightStorageBytes": 243287040,
+    "weightStorageDisplay": "243,287,040",
+    "vmhwmMib": 310.89,
+    "vmhwmDisplay": "310.89",
+    "loadSeconds": 4.185,
+    "perplexity": {
+      "tokensInSet": 8192,
+      "predictedTokens": 8184,
+      "totalNllDisplay": "28815.27",
+      "valueDisplay": "33.8158",
+      "valueRaw": 33.815783
+    },
+    "suite": {
+      "prompts": [
+        {
+          "prompt": "The history of the Roman Empire is",
+          "rep20": 1,
+          "distinct20": 0.6,
+          "sane": true
+        },
+        {
+          "prompt": "In a small village by the sea, there lived",
+          "rep20": 1,
+          "distinct20": 0.45,
+          "sane": true
+        },
+        {
+          "prompt": "The quick brown fox jumps over the",
+          "rep20": 1,
+          "distinct20": 0.45,
+          "sane": true
+        },
+        {
+          "prompt": "Scientists have discovered a new species of",
+          "rep20": 1,
+          "distinct20": 0.7,
+          "sane": true
+        },
+        {
+          "prompt": "To make a good cup of coffee, you should",
+          "rep20": 1,
+          "distinct20": 0.75,
+          "sane": true
+        },
+        {
+          "prompt": "The stock market rose sharply after",
+          "rep20": 1,
+          "distinct20": 0.9,
+          "sane": true
+        },
+        {
+          "prompt": "Once upon a time, in a kingdom far away,",
+          "rep20": 1,
+          "distinct20": 0.25,
+          "sane": true
+        },
+        {
+          "prompt": "The recipe calls for two cups of flour and",
+          "rep20": 1,
+          "distinct20": 0.7,
+          "sane": true
+        },
+        {
+          "prompt": "When the train arrived at the station,",
+          "rep20": 0.85,
+          "distinct20": 0.85,
+          "sane": true
+        },
+        {
+          "prompt": "Artificial intelligence will change the way we",
+          "rep20": 1,
+          "distinct20": 0.7,
+          "sane": true
+        },
+        {
+          "prompt": "The old lighthouse keeper watched as the",
+          "rep20": 1,
+          "distinct20": 0.2,
+          "sane": true
+        },
+        {
+          "prompt": "If you want to learn a new language,",
+          "rep20": 0.9,
+          "distinct20": 0.6,
+          "sane": true
+        }
+      ],
+      "rep20MeanDisplay": "0.9792",
+      "distinct20MeanDisplay": "0.5958",
+      "saneCount": 12,
+      "promptCount": 12
+    }
+  },
+  "derived": {
+    "throughputRatio": 0.594,
+    "throughputRatioDisplay": "0.594",
+    "perplexityRelChangePctDisplay": "-0.002",
+    "vmhwmRatio": 0.548,
+    "vmhwmRatioDisplay": "0.548",
+    "weightStorageRatioDisplay": "0.489"
+  },
+  "frozen": {
+    "h1MinRatio": 1.5,
+    "h2MaxRelPct": 5,
+    "h3MaxRatio": 0.6
+  }
+}

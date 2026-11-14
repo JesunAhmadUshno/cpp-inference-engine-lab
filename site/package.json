@@ -1,0 +1,1 @@
+{"dependencies":{"react":"19.3.1","react-dom":"19.3.1"},"devDependencies":{"@vitejs/plugin-react":"6.2.1","vite":"8.3.6"},"name":"cpp-inference-engine-lab-site","private":true,"scripts":{"build":"node tools/gen-data.mjs && node src/lab.check.mjs && vite build","check":"node src/lab.check.mjs","dev":"vite","gen":"node tools/gen-data.mjs","preview":"vite preview"},"type":"module"}
