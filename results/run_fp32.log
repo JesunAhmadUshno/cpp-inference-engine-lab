@@ -1,0 +1,5 @@
+[bench] arm=fp32 loaded in 2.83 s, weight storage 497759232 bytes
+[bench] throughput rep 0: 19.883 s, 6.438 tok/s
+[bench] throughput rep 1: 19.539 s, 6.551 tok/s
+[bench] throughput rep 2: 28.297 s, 4.524 tok/s
+[bench] throughput rep 3: 28.196 s, 4.540 tok/s

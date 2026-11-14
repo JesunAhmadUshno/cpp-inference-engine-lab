@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test-smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build (gcc, C++20, warnings on)
+        run: cmake --build build -j4
+      - name: Unit and end-to-end tests
+        run: ./build/engine_tests tests/fixtures
+      - name: Smoke generation, fp32 (tiny random-weight model)
+        run: ./build/engine_bench --model tests/fixtures/model.safetensors --arm fp32 --heads 4 --smoke --prompt-ids "3 14 15" --gen 8
+      - name: Smoke generation, int8 (tiny random-weight model)
+        run: ./build/engine_bench --model tests/fixtures/model.safetensors --arm int8 --heads 4 --smoke --prompt-ids "3 14 15" --gen 8
