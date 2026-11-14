@@ -1,0 +1,9 @@
+[bench] arm=int8 loaded in 4.26 s, weight storage 243287040 bytes
+[bench] throughput rep 0: 30.134 s, 4.248 tok/s
+[bench] throughput rep 1: 26.767 s, 4.782 tok/s
+[bench] throughput rep 2: 24.399 s, 5.246 tok/s
+[bench] throughput rep 3: 25.631 s, 4.994 tok/s
+[bench] throughput rep 4: 25.483 s, 5.023 tok/s
+[bench] throughput rep 5: 25.407 s, 5.038 tok/s
+[bench] throughput rep 6: 25.396 s, 5.040 tok/s
+[bench] VmHWM after throughput: 311.1 MiB

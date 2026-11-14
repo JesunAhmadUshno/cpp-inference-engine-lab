@@ -1,0 +1,30 @@
+[bench] arm=int8 loaded in 4.19 s, weight storage 243287040 bytes
+[bench] throughput rep 0: 34.326 s, 3.729 tok/s
+[bench] throughput rep 1: 33.690 s, 3.799 tok/s
+[bench] throughput rep 2: 41.802 s, 3.062 tok/s
+[bench] throughput rep 3: 54.518 s, 2.348 tok/s
+[bench] throughput rep 4: 37.095 s, 3.451 tok/s
+[bench] throughput rep 5: 36.193 s, 3.537 tok/s
+[bench] throughput rep 6: 33.310 s, 3.843 tok/s
+[bench] VmHWM after throughput: 310.9 MiB
+[bench] perplexity block at 0 done, running ppl 16.4831
+[bench] perplexity block at 1024 done, running ppl 24.7389
+[bench] perplexity block at 2048 done, running ppl 26.2966
+[bench] perplexity block at 3072 done, running ppl 28.4275
+[bench] perplexity block at 4096 done, running ppl 31.1490
+[bench] perplexity block at 5120 done, running ppl 32.4021
+[bench] perplexity block at 6144 done, running ppl 34.0986
+[bench] perplexity block at 7168 done, running ppl 33.8158
+[bench] suite prompt 0: rep20 1.000, distinct20 0.600, sane 1
+[bench] suite prompt 1: rep20 1.000, distinct20 0.450, sane 1
+[bench] suite prompt 2: rep20 1.000, distinct20 0.450, sane 1
+[bench] suite prompt 3: rep20 1.000, distinct20 0.700, sane 1
+[bench] suite prompt 4: rep20 1.000, distinct20 0.750, sane 1
+[bench] suite prompt 5: rep20 1.000, distinct20 0.900, sane 1
+[bench] suite prompt 6: rep20 1.000, distinct20 0.250, sane 1
+[bench] suite prompt 7: rep20 1.000, distinct20 0.700, sane 1
+[bench] suite prompt 8: rep20 0.850, distinct20 0.850, sane 1
+[bench] suite prompt 9: rep20 1.000, distinct20 0.700, sane 1
+[bench] suite prompt 10: rep20 1.000, distinct20 0.200, sane 1
+[bench] suite prompt 11: rep20 0.900, distinct20 0.600, sane 1
+[bench] wrote results/run_int8.json
