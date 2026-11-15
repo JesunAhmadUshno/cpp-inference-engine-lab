@@ -20,6 +20,65 @@ function VerdictCard({ id, title, verdict, good, measured, line }) {
   );
 }
 
+function EngineDiagram() {
+  const boxes = [
+    [20, 'Prompt ids', 'token input'],
+    [152, 'Embedding', 'tokens + positions'],
+    [284, 'Transformer', 'attention, KV cache'],
+    [416, 'Tensor ops', 'matmul, softmax'],
+    [548, 'Logits', 'greedy next token'],
+  ];
+  return (
+    <div>
+      <svg className="diagram" viewBox="0 0 680 228" role="img" aria-label="System diagram of the from-scratch C++ inference engine: prompt ids flow through embedding, transformer blocks and tensor ops to logits, fed by weights loaded from safetensors in fp32 or int8 form">
+        {boxes.map(([x, title, sub], i) => (
+          <g key={title}>
+            <rect className={i === 2 ? 'box-accent' : 'box'} x={x} y="24" width="112" height="56" rx="14" />
+            <text className="box-title" x={x + 56} y="48" textAnchor="middle">{title}</text>
+            <text x={x + 56} y="66" textAnchor="middle">{sub}</text>
+            {i < boxes.length - 1 && <line className="arrow" x1={x + 112} y1="52" x2={x + 132} y2="52" />}
+          </g>
+        ))}
+        <line className="arrow" x1="604" y1="80" x2="604" y2="104" />
+        <line className="arrow" x1="604" y1="104" x2="92" y2="104" />
+        <line className="arrow" x1="92" y1="104" x2="92" y2="84" />
+        <text x="348" y="100" textAnchor="middle">generated token feeds back as the next input</text>
+        <rect className="box" x="152" y="140" width="180" height="56" rx="14" />
+        <text className="box-title" x="242" y="164" textAnchor="middle">safetensors parser and loader</text>
+        <text x="242" y="182" textAnchor="middle">own parser, standard library only</text>
+        <rect className="box-accent" x="364" y="140" width="180" height="56" rx="14" />
+        <text className="box-title" x="454" y="164" textAnchor="middle">fp32 weights or int8 weights</text>
+        <text x="454" y="178" textAnchor="middle">int8: per-channel scales,</text>
+        <text x="454" y="192" textAnchor="middle">dequantize on the fly</text>
+        <line className="arrow" x1="332" y1="168" x2="364" y2="168" />
+        <line className="arrow" x1="340" y1="140" x2="340" y2="84" />
+      </svg>
+    </div>
+  );
+}
+
+function FlowDiagram() {
+  const steps = [
+    [20, 'Freeze', 'hypotheses and lines'],
+    [152, 'Run fp32 arm', 'full protocol'],
+    [284, 'Run int8 arm', 'same protocol'],
+    [416, 'Measure', 'speed and quality'],
+    [548, 'Verdicts', 'against frozen lines'],
+  ];
+  return (
+    <svg className="diagram" viewBox="0 0 680 104" role="img" aria-label="Flow diagram of the study protocol: hypotheses frozen first, then both arms run and measured, then verdicts compared with the frozen lines">
+      {steps.map(([x, title, sub], i) => (
+        <g key={title}>
+          <rect className={i === 0 || i === 4 ? 'box-accent' : 'box'} x={x} y="24" width="112" height="56" rx="14" />
+          <text className="box-title" x={x + 56} y="48" textAnchor="middle">{title}</text>
+          <text x={x + 56} y="66" textAnchor="middle">{sub}</text>
+          {i < steps.length - 1 && <line className="arrow" x1={x + 112} y1="52" x2={x + 132} y2="52" />}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 function RepChart() {
   const W = 680, H = 230, base = 190, top = 16;
   const max = Math.max(...fp32.throughput.reps, ...int8.throughput.reps) * 1.15;
@@ -64,6 +123,7 @@ export default function App() {
       <nav className="top">
         <a className="brand" href={REPO}>cpp-inference-engine-lab</a>
         <div className="links">
+          <a href="#engine">Engine</a>
           <a href="#verdicts">Verdicts</a>
           <a href="#throughput">Throughput</a>
           <a href="#quality">Quality and memory</a>
@@ -105,6 +165,26 @@ export default function App() {
             <div className="cap">predicted tokens in the frozen perplexity set, both arms</div>
           </div>
         </div>
+      </section>
+
+
+      <section id="engine" className="card">
+        <div className="head">
+          <div>
+            <p className="eyebrow">Engine and protocol</p>
+            <h2>One engine, two arms, one frozen protocol</h2>
+          </div>
+          <span className="pill info">Structure and flow, from the study setup</span>
+        </div>
+        <p className="sub">
+          The engine is built from scratch in C++20: its own safetensors parser, tensor ops,
+          attention and KV cache, and the W8A32 quantization path. No inference library is
+          linked, vendored, or wrapped.
+        </p>
+        <h3 className="block">System diagram</h3>
+        <EngineDiagram />
+        <h3 className="block">Study flow</h3>
+        <FlowDiagram />
       </section>
 
       <section id="verdicts" className="card">
