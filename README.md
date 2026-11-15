@@ -136,6 +136,7 @@ tokenizer files (same repo and revision as the study; SHA-256 hashes
 in data/PROVENANCE.md):
 
 ```sh
+mkdir -p assets
 REV=607a30d783dfa663caf39e06633721c8d4cfcd7e
 curl -L --retry 5 -o assets/model.safetensors \
   "https://huggingface.co/openai-community/gpt2/resolve/$REV/model.safetensors"
