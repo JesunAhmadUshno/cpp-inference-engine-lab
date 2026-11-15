@@ -275,6 +275,10 @@ export default function App() {
           <a href={RESULTS_URL}>RESULTS.md</a> · <a href={REPO}>GitHub repo</a>. Every number on
           this page is generated at build time from the repo's committed raw harness outputs.
         </p>
+        <div className="support">
+          <a className="support-pill" href="https://github.com/sponsors/JesunAhmadUshno">Sponsor this work</a>
+          <a className="support-pill" href="https://calendly.com/jesunahmadushno/30min">Work with me</a>
+        </div>
       </footer>
     </div>
   );
