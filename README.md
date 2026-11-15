@@ -103,6 +103,74 @@ Reference machine for the published numbers: AMD EPYC 9D25
 g++ 13.3.0, -O3, no -march=native, 4 engine threads. Expect roughly
 20 to 35 minutes per arm.
 
+## Usage: the engine_generate tool
+
+`engine_generate` is the command-line front end: it loads a
+checkpoint in either arm and generates greedily from a prompt.
+`tools/generate.py` wraps it for text prompts.
+
+Prerequisites: a C++20 compiler and CMake 3.20+ (Python 3 only for
+the text wrapper). No other dependencies.
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j4
+# optional: install engine_generate and engine_bench plus the headers
+cmake --install build --prefix ~/.local
+./build/engine_tests tests/fixtures
+```
+
+Try it with no download, on the tiny random-weight fixture model
+(random weights, so the ids are meaningless; this checks the
+pipeline end to end):
+
+```sh
+./build/engine_generate --model tests/fixtures/model.safetensors \
+    --heads 4 --prompt-ids "3 14 15" --tokens 8
+# prompt_ids: 3 14 15
+# generated_ids: 38 38 38 38 38 38 38 38
+```
+
+For real generation, fetch the pinned GPT-2 checkpoint and the two
+tokenizer files (same repo and revision as the study; SHA-256 hashes
+in data/PROVENANCE.md):
+
+```sh
+REV=607a30d783dfa663caf39e06633721c8d4cfcd7e
+curl -L --retry 5 -o assets/model.safetensors \
+  "https://huggingface.co/openai-community/gpt2/resolve/$REV/model.safetensors"
+curl -L --retry 5 -o assets/vocab.json \
+  "https://huggingface.co/openai-community/gpt2/resolve/$REV/vocab.json"
+curl -L --retry 5 -o assets/merges.txt \
+  "https://huggingface.co/openai-community/gpt2/resolve/$REV/merges.txt"
+```
+
+Then generate from a text prompt:
+
+```sh
+python3 tools/generate.py --prompt "The history of the Roman Empire is" \
+    --tokens 40
+```
+
+Output (measured on this machine; speed varies by host):
+
+```
+prompt_ids: 464 2106 286 262 7993 8065 318
+generated_ids: 257 13899 530 13 383 7993 8065 373 9393 416 262 22482 11 290 262 7993 8065 373 9393 416 262 22482 13 383 22482 547 262 717 284 4474 257 1181 286 1175 11 290 262 22482 547 262
+text: The history of the Roman Empire is a fascinating one. The Roman Empire was founded by the Romans, and the Roman Empire was founded by the Romans. The Romans were the first to establish a state of war, and the Romans were the
+```
+
+Add `--arm int8` for the quantized path; its continuation tracks the
+fp32 one closely before drifting, which is the H2 result in miniature.
+The wrapper encodes the prompt with `tools/gpt2_tokenizer.py`, a
+standard-library-only GPT-2 tokenizer written for this repo and
+validated against the study's frozen artifacts: it reproduces all 12
+prompt id lines in data/prompt_ids.txt and the first 8,192 ids of
+data/ppl_ids.txt exactly (`python3 tools/generate.py --self-test`
+runs the prompt check). The engine itself still consumes token ids
+only; `engine_generate --prompt-ids "..."` (or `--prompt-file`) is
+the direct route.
+
 ## Claims ceiling
 
 Study scope only: one model, one machine, one quantization scheme,
@@ -115,8 +183,10 @@ is claimed.
 
     include/engine/   the engine (safetensors, tensors, GPT-2, quantization)
     src/bench.cpp     the benchmark harness (frozen protocol)
+    src/generate.cpp  the engine_generate command-line tool (see Usage)
     tests/            unit and end-to-end tests, tiny fixtures
-    tools/            data preparation, tiny-model and reference tools, results renderer
+    tools/            data preparation, tiny-model and reference tools, results renderer,
+                      the stdlib GPT-2 tokenizer and the generate.py text front end
     data/             frozen token data with provenance
     results/          raw harness outputs and logs
 

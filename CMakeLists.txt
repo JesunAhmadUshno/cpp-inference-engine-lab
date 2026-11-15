@@ -19,6 +19,12 @@ target_link_libraries(engine INTERFACE Threads::Threads)
 add_executable(engine_bench src/bench.cpp)
 target_link_libraries(engine_bench PRIVATE engine)
 
+add_executable(engine_generate src/generate.cpp)
+target_link_libraries(engine_generate PRIVATE engine)
+
+install(TARGETS engine_generate engine_bench RUNTIME DESTINATION bin)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/engine DESTINATION include)
+
 enable_testing()
 add_executable(engine_tests tests/test_engine.cpp)
 target_link_libraries(engine_tests PRIVATE engine)

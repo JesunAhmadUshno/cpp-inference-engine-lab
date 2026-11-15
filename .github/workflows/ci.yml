@@ -20,3 +20,5 @@ jobs:
         run: ./build/engine_bench --model tests/fixtures/model.safetensors --arm fp32 --heads 4 --smoke --prompt-ids "3 14 15" --gen 8
       - name: Smoke generation, int8 (tiny random-weight model)
         run: ./build/engine_bench --model tests/fixtures/model.safetensors --arm int8 --heads 4 --smoke --prompt-ids "3 14 15" --gen 8
+      - name: CLI smoke (engine_generate, tiny model)
+        run: ./build/engine_generate --model tests/fixtures/model.safetensors --heads 4 --prompt-ids "3 14 15" --tokens 8
